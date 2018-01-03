@@ -84,8 +84,7 @@ knex.schema.createTableIfNotExists('inspectors', function(table) {
   table.string('borough');
 }).then(() => {
   return knex('inspectors')
-    .insert({ first_name: 'Tricia', last_name: 'Forrester', borough: 'Queens' })
-    .then(results => console.log(results));
+    .insert({ first_name: 'Tricia', last_name: 'Forrester', borough: 'Queens' });
 }).then(() => { // Destroy the connection pool
   knex.destroy().then(() => {
     console.log('database connection closed');
