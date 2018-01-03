@@ -2,6 +2,7 @@
 
 const express = require('express');
 const Treeize = require('treeize');
+const bodyParser = require('body-parser'); 
 
 
 const { DATABASE, PORT } = require('./config');
@@ -9,6 +10,7 @@ const knex = require('knex')(DATABASE);
 
 const app = express();
 const restaurant_data = new Treeize();
+const jsonParser = bodyParser.json();
 
 // app.get('/restaurants', (req, res) => {
 //   knex.select('id', 'name', 'cuisine', 'borough')
@@ -70,6 +72,16 @@ app.get('/restaurants', (req, res) => {
     });
 
 });
-// ADD ANSWERS HERE
+
+app.post('/restaurants', (req, res) => {
+  knex('restaurants')
+    .insert({name: req.body.name, cuisine: req.body.cuisine, borough: req.body.borough, grades: req.body.grades})
+    .then(results => console.log(results));
+  
+});
+
+
+
+
 
 app.listen(PORT);
